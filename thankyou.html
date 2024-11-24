@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/filters.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <title>Success</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #18084f;
+        }
+        p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/autoparts.png" alt="logo">
+            </a>
+            <h2>Mohammed <br>Auto Parts</h2>
+                </div>
+        
+        <div class="signup">
+            <span id="welcome-message"></span>
+            <a id="logout-link" href="#" style="display: none;">
+                <img src="images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex; justify-content: flex-end;" title="Log Out">
+            </a>
+            <a href="signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+                <img src="images/sign.png" alt="signup" class="sign-icon" width="30">
+            </a>
+        </div>
+    </header>
+    
+    
+
+    <div class="menu">
+        <ul class="menu-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="allprod.html">All products</a></li>
+            <li><a href="toyota.html">Toyota</a></li>
+            <li><a href="nissan.html">Nissan</a></li>
+            <li><a href="dodge.html">Dodge</a></li>
+            <li><a href="honda.html">Honda</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            </div>
+        </div> 
+        </ul>
+        
+    <br><br>
+    <div class="container">
+        <h2>Thank You for Your Purchase!</h2>
+        <p>Your order has been successfully processed. You will receive a confirmation email with your order details shortly.</p>
+        <p>If you have any questions, feel free to <a href="mailto:ghamma43@gmail.com">contact us</a> .</p>
+        <a href="index.html">
+            <button type="submit" class="sign-button" style="width: 30%;">Back to homepage</button>
+        </a>
+    </div>
+    
+
+
+
+<script>
+
+    function loadSessionData() {
+        fetch('session.php')
+            .then(response => response.json())
+            .then(data => {
+                const welcomeMessage = document.getElementById('welcome-message');
+                const logoutLink = document.getElementById('logout-link');
+                const signinLink = document.getElementById('signin-link');
+
+                if (data.username) {
+                    welcomeMessage.textContent = `Welcome, ${data.username}`;
+                    logoutLink.style.display = 'inline';
+                    signinLink.style.display = 'none';
+                    logoutLink.addEventListener('click', function() {
+                        window.location.href = 'session.php?logout=true';
+                    });
+                } else {
+                    welcomeMessage.textContent = '';
+                    logoutLink.style.display = 'none';
+                    signinLink.style.display = 'inline';
+                }
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSessionData);
+</script>
+<script src="filters.js"></script>
+    <br><br>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-content">
+            <h3>All Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All Products</a></li>
+                <li><a href="toyota.html">Toyota</a></li>
+                <li><a href="nissan.html">Nissan</a></li>
+                <li><a href="dodge.html">Dodge</a></li>
+                <li><a href="honda.html">Honda</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+            <h3>Quick Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All products</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+        <h3>Contact Us</h3>
+            <p><a href="mailto:ghamma43@gmail.com">Email</a></p>
+            <p>+966 56 050 4111</p>
+            
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <p>&copy; 2024 AutoParts. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

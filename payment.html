@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/filters.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <title>Payment</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #18084f;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #495057;
+        }
+        .shipping-input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .shipping-input:focus {
+            border-color: #18084f;
+            outline: none;
+        }
+        .sign-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #18084f;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .payment-icons img {
+            height: 30px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/autoparts.png" alt="logo">
+            </a>
+            <h2>Mohammed <br>Auto Parts</h2>
+                </div>
+        
+        <div class="signup">
+            <span id="welcome-message"></span>
+            <a id="logout-link" href="#" style="display: none;">
+                <img src="images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex; justify-content: flex-end;" title="Log Out">
+            </a>
+            <a href="signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+                <img src="images/sign.png" alt="signup" class="sign-icon" width="30">
+            </a>
+        </div>
+    </header>
+    
+    
+
+    <div class="menu">
+        <ul class="menu-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="allprod.html">All products</a></li>
+            <li><a href="toyota.html">Toyota</a></li>
+            <li><a href="nissan.html">Nissan</a></li>
+            <li><a href="dodge.html">Dodge</a></li>
+            <li><a href="honda.html">Honda</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            </div>
+        </div> 
+        </ul>
+        
+    <br><br>
+    <form action="thankyou.html">
+        <div class="container">
+            <h2>Payment Information</h2>
+    
+            <div class="payment-icons">
+                <img src="images/visa.png" alt="Visa">
+                <img src="images/master.png" alt="MasterCard">
+                <img src="images/social.png" alt="American Express">
+                <img src="images/apple-pay.png" alt="Discover">
+            </div>
+    
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" class="shipping-input" name="name" placeholder="Card holder name" required>
+            </div>
+            <div class="form-group">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" class="shipping-input" name="card-number" placeholder="Card Number" required>
+            </div>
+            <div class="form-group">
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" class="shipping-input" name="expiry-date" placeholder="MM/YY" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" class="shipping-input" name="cvv" placeholder="CVV" required>
+            </div>
+            
+            <div class="form-group">
+                    <button type="submit" class="sign-button">Pay</button>
+            </div>
+        </div>
+    </form>
+    
+
+
+
+<script>
+
+    function loadSessionData() {
+        fetch('session.php')
+            .then(response => response.json())
+            .then(data => {
+                const welcomeMessage = document.getElementById('welcome-message');
+                const logoutLink = document.getElementById('logout-link');
+                const signinLink = document.getElementById('signin-link');
+
+                if (data.username) {
+                    welcomeMessage.textContent = `Welcome, ${data.username}`;
+                    logoutLink.style.display = 'inline';
+                    signinLink.style.display = 'none';
+                    logoutLink.addEventListener('click', function() {
+                        window.location.href = 'session.php?logout=true';
+                    });
+                } else {
+                    welcomeMessage.textContent = '';
+                    logoutLink.style.display = 'none';
+                    signinLink.style.display = 'inline';
+                }
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSessionData);
+</script>
+<script src="filters.js"></script>
+    <br><br>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-content">
+            <h3>All Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All Products</a></li>
+                <li><a href="toyota.html">Toyota</a></li>
+                <li><a href="nissan.html">Nissan</a></li>
+                <li><a href="dodge.html">Dodge</a></li>
+                <li><a href="honda.html">Honda</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+            <h3>Quick Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All products</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+        <h3>Contact Us</h3>
+            <p><a href="mailto:ghamma43@gmail.com">Email</a></p>
+            <p>+966 56 050 4111</p>
+            
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <p>&copy; 2024 AutoParts. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

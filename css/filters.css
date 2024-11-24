@@ -1,0 +1,107 @@
+
+.filter-container {
+    display: flex;
+    justify-content: center; 
+    position: sticky;
+    padding-bottom: 20px;
+    top: 84px;
+    background-color: #f3f4f6;
+    border-bottom: solid #d7d7d7;
+
+}
+
+.filter {
+    margin-right: 10px;
+}
+
+.filter select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    cursor: pointer;
+    background: #fff;
+    color: #18084f;
+    transition: all ease-in-out 0.2s;
+}
+
+.filter select:disabled{
+    cursor: unset;
+    filter: brightness(1.0);
+}
+
+
+.go-button {
+    background-color: #18084f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 11px;
+    margin-top: 2px;
+}
+
+
+.go-button:disabled{
+    background-color: #170849ae;
+    color: #fff;
+    cursor:unset;
+    filter: brightness(1.0);
+}
+
+/* in search results*/
+.filtering-con {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fltr {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    border:none;
+    padding: 0 60px 40px 10px;
+    margin-left: 10px;
+    margin-top: 12px;
+    margin-bottom: auto;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+
+    
+}
+.fltr h3{
+    color: #18084f;
+    font-size:x-large;
+    font-weight: 600;
+    width: 150px;
+}
+
+.fltr label {
+    display: block;
+    margin-top: 10px;
+    color: #18084f;
+    width: 150px;
+}
+
+.fltr select, input[type="range"] {
+    width: 105%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: solid #d7d7d7;
+    cursor: pointer;
+    background: #fff;
+    color: #18084f;
+}
+
+
+.fltr button{
+    color: #fff;
+    background-color: #18084f;
+    width: 105%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+}

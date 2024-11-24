@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AllProducts</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="css/myStyle.css">
+        <link rel="stylesheet" href="css/menu.css">
+        <link rel="stylesheet" href="css/filters.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/products.css">
+        <link rel="stylesheet" href="css/footer.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/autoparts.png" alt="logo">
+                </a>
+                <h2>Mohammed Auto Parts</h2>
+            </div>
+        
+            <div class="search-con">
+                <form id="searchForm">
+                    <input type="text" id="searchInput" placeholder="Search..." class="search-bar" required>
+                    <button type="submit" class="search-button">Search</button>
+                </form> 
+            </div>       
+                   <div class="cart-icon-container">
+                    <a href="cart.html">
+                        <img src="images/cart-icon.png" alt="Cart" class="cart-icon" width="30" height="30">
+                    </a>
+                    <span class="cart-count" id="cartcount" onchange="updateCartCount()">0</span>
+                </div>
+            <div class="signup">
+                <span id="welcome-message"></span>
+                <a id="logout-link" href="#" style="display: none;">
+                    <img src="images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex; justify-content: flex-end;" title="Log Out">
+                </a>
+                <a href="signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+                    <img src="images/sign.png" alt="signup" class="sign-icon" width="30">
+                </a>
+            </div>
+        </header>
+    
+    
+    
+        <div class="filter-container">
+            <div class="filter">
+                <select id="brand" onchange="updateModels()">
+                    <option value="">Select Brand</option>
+                    <option value="toyota">Toyota</option>
+                    <option value="nissan">Nissan</option>
+                    <option value="dodge">Dodge</option>
+                    <option value="honda">Honda</option>
+                </select>
+            </div>
+        
+            <div class="filter">
+                <select id="model" onchange="updateYears()" disabled>
+                    <option value="">Select Model</option>
+                </select>
+            </div>
+        
+            <div class="filter">
+                <select id="year" disabled>
+                    <option value="">Select Year</option>
+                </select>
+            </div>
+                <div class="go-button-con">
+                    <button id="gobutton" class="go-button" onclick="applyFilters()" disabled>Go</button>
+                </div>
+        </div>
+    <div class="menu">
+    <ul class="menu-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="allprod.html">All products</a></li>
+        <li><a href="toyota.html">Toyota</a></li>
+        <li><a href="nissan.html">Nissan</a></li>
+        <li><a href="dodge.html">Dodge</a></li>
+        <li><a href="honda.html">Honda</a></li>
+        <li><a href="about.html">About Us</a></li>
+
+        <li><a href="contact.html">Contact Us</a></li>
+        </div>
+    </div>
+    </ul>
+    <script>
+        function loadSessionData() {
+            fetch('session.php')
+                .then(response => response.json())
+                .then(data => {
+                    const welcomeMessage = document.getElementById('welcome-message');
+                    const logoutLink = document.getElementById('logout-link');
+                    const signinLink = document.getElementById('signin-link');
+    
+                    if (data.username) {
+                        welcomeMessage.textContent = `Welcome, ${data.username}`;
+                        logoutLink.style.display = 'inline';
+                        signinLink.style.display = 'none';
+                        logoutLink.addEventListener('click', function() {
+                            window.location.href = 'session.php?logout=true';
+                        });
+                    } else {
+                        welcomeMessage.textContent = '';
+                        logoutLink.style.display = 'none';
+                        signinLink.style.display = 'inline';
+                    }
+                });
+        }
+    
+        document.addEventListener('DOMContentLoaded', loadSessionData);
+        async function fetchProducts() {
+            try {
+                const response = await fetch('fetchproducts.php?brand=nissan');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const products = await response.json();
+                console.log(products); 
+                const resultsContainer = document.getElementById('nissan-sec');
+                
+
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.innerHTML = `
+<a href="productdetails.html?id=${product.id}" class="product-link">
+                            <img src="${product.image_url}" alt="${product.name}" class="product-image">
+                            </a>                <div class="product-info">
+                    <h4 class="product-name">${product.name}</h4>
+                    <p class="product-price">Price: $${product.price}</p>
+                    <p class="product-stock">Stock: ${product.stock}</p>
+                </div>
+                <div class="rating">
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9734</span>
+                </div>
+                <button class="add-to-cart" data-product='${JSON.stringify(product)}'>Add to Cart</button>
+            `;
+            resultsContainer.appendChild(productCard);
+        });
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'error-mess';
+        messageContainer.textContent = 'Error fetching products.';
+        resultsContainer.appendChild(messageContainer);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchProducts();
+
+    document.getElementById('nissan-sec').addEventListener('click', function(event) {
+        if (event.target.classList.contains('add-to-cart')) {
+            const product = JSON.parse(event.target.getAttribute('data-product'));
+            product.id = String(product.id); 
+            addToCart(product);
+        }
+    });
+});
+
+function addToCart(product) {
+    
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingProductIndex = cart.findIndex(item => item.id === product.id);
+    
+    if (existingProductIndex > -1) {
+        alert(`${product.name} is already in your cart!`);
+    } else {
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(`${product.name} has been added to your cart!`);
+        updateCartCount();
+
+    }
+}
+    </script>
+<br>
+<script src="filters.js"></script>
+<fieldset>
+    <legend>Nissan Parts</legend>
+    <div id="nissan-sec" class="results-container"></div>
+</fieldset>
+<br><br>
+<footer>
+    <div class="footer-container">
+        <div class="footer-content">
+            <h3>All Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All Products</a></li>
+                <li><a href="toyota.html">Toyota</a></li>
+                <li><a href="nissan.html">Nissan</a></li>
+                <li><a href="dodge.html">Dodge</a></li>
+                <li><a href="honda.html">Honda</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+            <h3>Quick Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All products</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+        <h3>Contact Us</h3>
+            <p><a href="mailto:ghamma43@gmail.com">Email</a></p>
+            <p>+966 56 050 4111</p>
+            
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <p>&copy; 2024 AutoParts. All rights reserved.</p>
+    </div>
+</footer>
+    </body>
+</html>

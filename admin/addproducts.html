@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/myStyle.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <title>Adding Products</title>
+    <style>
+.container {
+    max-width: 400px; 
+    margin: 50px auto;
+    padding: 30px; 
+    background-color: #fff; 
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+h2{
+    text-align: center;
+    color: #18084f;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.form-container {
+    width: 90%; 
+    margin: 10px 0; 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    flex-direction: column; 
+}
+
+.form-container u{
+    color: #fff;
+}
+.form-container a:hover{
+    background-color: #270d7a;
+    color: #fff;
+}
+input {
+    width: 94.3%; 
+    padding: 10px;
+    border: 1px solid #ced4da;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+select{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #18084f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; 
+    width: 100%; 
+}
+.add-message{
+    color: #fff;
+    background-color: #18084f;
+    border-radius: 5px;
+    padding: 1px 0;
+    margin: 0 30px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="admin.html">
+                <img src="../images/autoparts.png" alt="logo">
+            </a>
+            <h2>Mohammed<br> Auto Parts</h2>
+        </div>
+        <div class="signup">
+            <span id="welcome-message"></span>
+            <a id="logout-link" href="#" style="display: none;">
+                <img src="../images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex; justify-content: flex-end;" title="Log Out">
+            </a>
+            <a href="../signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+                <img src="../images/sign.png" alt="signup" class="sign-icon" width="30">
+            </a>
+        </div>
+    </header>
+    
+    
+<br>
+    <div class="container">
+    <h2>Add Product</h2>
+    <div id="messageDisplay"></div>
+
+    <div class="form-container">
+    <form action="addproducts.php" method="POST">
+        <select name="brand" required>
+            <option value="">Select Brand</option>
+            <option value="toyota">Toyota</option>
+            <option value="nissan">NIssan</option>
+            <option value="dodge">Dodge</option>
+            <option value="honda">Honda</option>
+        </select>
+        <input type="text" name="model" placeholder="Car Model" required>
+        <input type="text" name="year" placeholder="2010,2011,2012..." required>
+        <input type="text" name="name" placeholder="Product Name" required>
+        <input type="text" name="description" placeholder="Description" required>
+        <input type="number" name="price" placeholder="Price" required step="0.01">
+        <input type="number" name="stock" placeholder="Stock" required>
+        <input type="text" name="image_url" placeholder="Image URL (Path)">
+        <button type="submit">Add Product</button>
+    </form>
+    </div>
+  </div>
+
+  <script>
+    function loadSessionData() {
+        fetch('../session.php')
+            .then(response => response.json())
+            .then(data => {
+                const welcomeMessage = document.getElementById('welcome-message');
+                const logoutLink = document.getElementById('logout-link');
+                const signinLink = document.getElementById('signin-link');
+
+                if (data.username) {
+                    welcomeMessage.textContent = `Welcome, ${data.username}`;
+                    logoutLink.style.display = 'inline';
+                    signinLink.style.display = 'none';
+                    logoutLink.addEventListener('click', function() {
+                        window.location.href = 'session.php?logout=true';
+                    });
+                } else {
+                    welcomeMessage.textContent = '';
+                    logoutLink.style.display = 'none';
+                    signinLink.style.display = 'inline';
+                }
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSessionData);
+
+
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
+
+    const messageDisplay = document.getElementById('messageDisplay');
+    if (status === 'success') {
+        messageDisplay.innerHTML = ` <div class="add-message">
+    <p>Product has been added successfully.</p>
+    </div>`;
+        messageDisplay.style.display = 'block';
+    } else if (status === 'error') {
+        messageDisplay.textContent = 'There was an error adding this product. Please try again.';
+        messageDisplay.classList.add('error');
+        messageDisplay.style.display = 'block';
+    }
+</script>
+</body>
+</html>

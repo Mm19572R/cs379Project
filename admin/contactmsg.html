@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Contact Messages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/myStyle.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="admin.html">
+                <img src="../images/autoparts.png" alt="logo">
+            </a>
+            <h2>Mohammed <br> Auto Parts</h2>
+        </div>
+        
+        <div class="signup" style="display: flex; align-items: center;">
+            <span id="welcome-message"></span>
+            <a id="logout-link" href="#" style="display: none;">
+                <img src="../images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex;" title="Log Out">
+            </a>
+            <a href="../signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+                <img src="../images/sign.png" alt="signup" class="sign-icon" width="30">
+            </a>
+        </div>
+    </header>
+    
+<div class="nav-container">
+    <div class="sidebar">
+        <ul class="menu">
+            <li><a href="admin.html">Home</a></li>
+            <li><a href="addproducts.html">Add New Products</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="contactmsg.html" class="active">Contacts</a></li>
+            <li><a href="../index.html">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="admin-content">
+        <h1>User Messages</h1>
+        
+        <table class="messages-table">
+            <thead>
+                <tr>
+                    <th>Message ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>#010</td>
+                    <td>Mohammed Alghamdi</td>
+                    <td>Mohammed32@gmail.com</td>
+                    <td>2024-11-18</td>
+                    <td>Hello, I have a question about my order.</td>
+                </tr>
+                <tr>
+                    <td>#094</td>
+                    <td>ahmed </td>
+                    <td>ahmed_j5@gmail.com</td>
+                    <td>2024-11-15</td>
+                    <td>Can I return an item I purchased?</td>
+                </tr>
+                <tr>
+                    <td>#132</td>
+                    <td>No name</td>
+                    <td>gie75@gmail.com</td>
+                    <td>2024-11-15</td>
+                    <td>What are the shipping options available?</td>
+                </tr>
+                <tr>
+                    <td>#154</td>
+                    <td>Ali Ahmed</td>
+                    <td>alih.221@gmail.com</td>
+                    <td>2024-11-13</td>
+                    <td>Contact me soon please!</td>
+                </tr>
+                <tr>
+                    <td>#005</td>
+                    <td>Faisal</td>
+                    <td>fai6_al@gmail.com</td>
+                    <td>2024-11-05</td>
+                    <td>I need help with a billing issue.</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+
+</body>
+</html>

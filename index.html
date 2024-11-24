@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoParts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/myStyle.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/filters.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo">
+        <a href="index.html">
+            <img src="images/autoparts.png" alt="logo">
+        </a>
+        <h2>Mohammed Auto Parts</h2>
+    </div>
+
+    <div class="search-con">
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="Search..." class="search-bar" required>
+            <button type="submit" class="search-button">Search</button>
+        </form> 
+    </div>       
+           <div class="cart-icon-container">
+            <a href="cart.html">
+                <img src="images/cart-icon.png" alt="Cart" class="cart-icon" width="30" height="30">
+            </a>
+            <span class="cart-count" id="cartcount" onchange="updateCartCount()">0</span>
+        </div>
+    <div class="signup">
+        <span id="welcome-message"></span>
+        <a id="logout-link" href="#" style="display: none;">
+            <img src="images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex; justify-content: flex-end;" title="Log Out">
+        </a>
+        <a href="signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+            <img src="images/sign.png" alt="signup" class="sign-icon" width="30">
+        </a>
+    </div>
+</header>
+
+<script>
+  function loadSessionData() {
+    fetch('session.php')
+        .then(response => response.json())
+        .then(data => {
+            const welcomeMessage = document.getElementById('welcome-message');
+            const logoutLink = document.getElementById('logout-link');
+            const signinLink = document.getElementById('signin-link');
+
+            if (data.username) {
+                welcomeMessage.innerHTML = `Welcome, <a href="account.html" id="username-link"> ${data.username}</a>`; 
+                logoutLink.style.display = 'inline';
+                signinLink.style.display = 'none';
+
+                logoutLink.addEventListener('click', function() {
+                    window.location.href = 'session.php?logout=true';
+                });
+            } else {
+                welcomeMessage.textContent = '';
+                logoutLink.style.display = 'none';
+                signinLink.style.display = 'inline';
+            }
+        });
+}
+
+document.addEventListener('DOMContentLoaded', loadSessionData);
+</script>
+
+
+<div class="filter-container">
+    <div class="filter">
+        <select id="brand" onchange="updateModels()">
+            <option value="">Select Brand</option>
+            <option value="toyota">Toyota</option>
+            <option value="nissan">Nissan</option>
+            <option value="dodge">Dodge</option>
+            <option value="honda">Honda</option>
+        </select>
+    </div>
+
+    <div class="filter">
+        <select id="model" onchange="updateYears()" disabled>
+            <option value="">Select Model</option>
+        </select>
+    </div>
+
+    <div class="filter">
+        <select id="year" disabled>
+            <option value="">Select Year</option>
+        </select>
+    </div>
+    <div class="go-button-con">
+        <button id="gobutton" class="go-button" onclick="applyFilters()" disabled>Go</button>
+    </div>
+</div>
+
+<div class="menu">
+    <ul class="menu-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="allprod.html">All products</a></li>
+        <li><a href="toyota.html">Toyota</a></li>
+        <li><a href="nissan.html">Nissan</a></li>
+        <li><a href="dodge.html">Dodge</a></li>
+        <li><a href="honda.html">Honda</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+</div>
+
+<br>
+<div class="img-container">
+    <img src="images/promo-image.jpg" alt="Promotional Image" class="promo-image">
+
+</div>
+<br>
+
+<fieldset>
+    <legend>Best selling products</legend>
+    <div class="results-container">
+        <div class="product-card">
+            <img src="images/camrysideskirt.jpg" alt="Camry Side Skirt" class="product-image">
+            <div class="product-info">
+            <h4 class="product-name">2018 Toyota Camry Side Skirt</h4>
+                <p class="product-price">Price: $49.99</p>
+                <p class="product-stock"><span>Stock:</span> 5</p>
+                <div class="rating">
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9734</span>
+                    <span class="star">&#9734</span>
+                </div>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/altimawinsh.png" alt="altima windshield" class="product-image">
+            <div class="product-info">
+            <h4 class="product-name">2016 Altima Windshield Wipers</h4>
+                <p class="product-price">Price: $15.99</p>
+                <p class="product-stock"><span>Stock:</span> 10</p>
+                <div class="rating">
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9734</span>
+                    <span class="star">&#9734</span>
+                </div>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/corollaairfilter.png" alt="corolla filter" class="product-image">
+            <div class="product-info">
+            <h4 class="product-name">2006 Toyota Corolla Air Filter</h4>
+                <p class="product-price">Price: $14.99</p>
+                <p class="product-stock"><span>Stock:</span> 13</p>
+                <div class="rating">
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                </div>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="images/hondaoilfilter.jpg" alt="honda filter" class="product-image">
+            <div class="product-info">
+            <h4 class="product-name">2018 Honda Accord Oil Filter</h4>
+                <p class="product-price">Price: $9.99</p>
+                <p class="product-stock"><span>Stock:</span> 17</p>
+                <div class="rating">
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9734</span>
+                </div>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+        <div class="product-card">
+            <img src="images/camryfrontlip.jpg" alt="camry front lip" class="product-image">
+            <div class="product-info">
+            <h4 class="product-name">2018 Toyota Camry Front Lip</h4>
+                <p class="product-price">Price: $59.99</p>
+                <p class="product-stock"><span>Stock:</span> 6</p>
+                <div class="rating">
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9733</span>
+                    <span class="star">&#9734</span>
+                    <span class="star">&#9734</span>
+                </div>
+            </div>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+
+    </div>
+    
+</fieldset>
+
+<br><br>
+<footer>
+    <div class="footer-container">
+        <div class="footer-content">
+            <h3>All Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All Products</a></li>
+                <li><a href="toyota.html">Toyota</a></li>
+                <li><a href="nissan.html">Nissan</a></li>
+                <li><a href="dodge.html">Dodge</a></li>
+                <li><a href="honda.html">Honda</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+            <h3>Quick Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All products</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+            <h3>Contact Us</h3>
+            <p><a href="mailto:ghamma43@gmail.com">Email</a></p>
+            <p>+966 56 050 4111</p>
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <p>&copy; 2024 AutoParts. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="filters.js"></script>
+</body>
+</html>

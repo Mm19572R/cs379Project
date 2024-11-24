@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/filters.css">
+    <title>Contact Us</title>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/autoparts.png" alt="logo">
+            </a>
+            <h2>Mohammed Auto Parts</h2>
+        </div>
+    
+        <div class="search-con">
+            <form id="searchForm">
+                <input type="text" id="searchInput" placeholder="Search..." class="search-bar" required>
+                <button type="submit" class="search-button">Search</button>
+            </form> 
+        </div>       
+               <div class="cart-icon-container">
+                <a href="cart.html">
+                    <img src="images/cart-icon.png" alt="Cart" class="cart-icon" width="30" height="30">
+                </a>
+                <span class="cart-count" id="cartcount" onchange="updateCartCount()">0</span>
+            </div>
+        <div class="signup">
+            <span id="welcome-message"></span>
+            <a id="logout-link" href="#" style="display: none;">
+                <img src="images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex; justify-content: flex-end;" title="Log Out">
+            </a>
+            <a href="signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+                <img src="images/sign.png" alt="signup" class="sign-icon" width="30">
+            </a>
+        </div>
+    </header>
+
+    <div class="filter-container">
+    <div class="filter">
+        <select id="brand" onchange="updateModels()">
+            <option value="">Select Brand</option>
+            <option value="toyota">Toyota</option>
+            <option value="nissan">Nissan</option>
+            <option value="dodge">Dodge</option>
+            <option value="honda">Honda</option>
+        </select>
+    </div>
+
+    <div class="filter">
+        <select id="model" onchange="updateYears()" disabled>
+            <option value="">Select Model</option>
+        </select>
+    </div>
+
+    <div class="filter">
+        <select id="year" disabled>
+            <option value="">Select Year</option>
+        </select>
+    </div>
+        <div class="go-button-con">
+            <button id="gobutton" class="go-button" onclick="applyFilters()" disabled>Go</button>
+        </div>
+</div>
+
+    <div class="menu">
+    <ul class="menu-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="allprod.html">All products</a></li>
+        <li><a href="toyota.html">Toyota</a></li>
+        <li><a href="nissan.html">Nissan</a></li>
+        <li><a href="dodge.html">Dodge</a></li>
+        <li><a href="honda.html">Honda</a></li>
+        <li><a href="about.html">About Us</a></li>
+
+        <li><a href="contact.html">Contact Us</a></li>
+        </div>
+    </div>
+    </ul>
+    <br><br>
+    <div class="contact-container">
+        <h1 class="contact-title">Contact Us</h1>
+
+        <div id="messageDisplay" style="display: none;">
+        </div>
+
+        <form class="contact-form" action="servers/contacts.php" method="post">
+            <p class="form-label">Name:</p>
+            <input class="form-input" type="text" id="name" name="fullname" placeholder="Your full name..." required>
+
+            <p class="form-label">Email:</p>
+            <input class="form-input" type="email" id="email" name="email" placeholder="Your email..." required>
+
+            <p class="form-label">(Optional) Phone No:</p>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="Your phone number...">
+
+            <p class="form-label">Message:</p>
+            <input type="text" name="message" placeholder="What is your message?" class="message" required>
+
+            <button class="form-button" type="submit">Send Message</button>
+        </form>
+        <hr>
+        <div class="email-num">
+            <p><b>OR</b></p>
+        <p>Contact us in <a href="mailto:ghamma43@gmail.com"><u>Email</u></a> or via +966560504111</p>
+        </div>
+    </div>
+    <br><br>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <h3>All Links</h3>
+                <ul class="footer-list"> 
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="allprod.html">All Products</a></li>
+                    <li><a href="toyota.html">Toyota</a></li>
+                    <li><a href="nissan.html">Nissan</a></li>
+                    <li><a href="dodge.html">Dodge</a></li>
+                    <li><a href="honda.html">Honda</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="signin.html">Sign In</a></li>
+                </ul>
+            </div>
+            <div class="footer-content">
+                <h3>Quick Links</h3>
+                <ul class="footer-list"> 
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="allprod.html">All products</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-content">
+            <h3>Contact Us</h3>
+                <p><a href="mailto:ghamma43@gmail.com">Email</a></p>
+                <p>+966 56 050 4111</p>
+                
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <p>&copy; 2024 AutoParts. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function loadSessionData() {
+            fetch('session.php')
+                .then(response => response.json())
+                .then(data => {
+                    const welcomeMessage = document.getElementById('welcome-message');
+                    const logoutLink = document.getElementById('logout-link');
+                    const signinLink = document.getElementById('signin-link');
+    
+                    if (data.username) {
+                        welcomeMessage.textContent = `Welcome, ${data.username}`;
+                        logoutLink.style.display = 'inline';
+                        signinLink.style.display = 'none';
+                        logoutLink.addEventListener('click', function() {
+                            window.location.href = 'session.php?logout=true';
+                        });
+                    } else {
+                        welcomeMessage.textContent = '';
+                        logoutLink.style.display = 'none';
+                        signinLink.style.display = 'inline';
+                    }
+                });
+        }
+    
+        document.addEventListener('DOMContentLoaded', loadSessionData);
+        
+        // for displaying the messages
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get('status');
+
+        const messageDisplay = document.getElementById('messageDisplay');
+        if (status === 'success') {
+            messageDisplay.innerHTML = ` <div class="contact-message">
+        <p>Thank you! We will contact you within 12 hours maximum.</p>
+        </div>`;
+            messageDisplay.style.display = 'block';
+        } else if (status === 'error') {
+            messageDisplay.textContent = 'There was an error sending your message. Please try again.';
+            messageDisplay.classList.add('error');
+            messageDisplay.style.display = 'block';
+        }
+        updateCartCount();
+    </script>
+    <script src="filters.js"></script>
+</body>
+</html>

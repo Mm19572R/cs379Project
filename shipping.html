@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/filters.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <title>shipping</title>
+    <style>
+         body {
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #18084f;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #18084f;
+        }
+        .shipping-input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            color: #18084f;
+            outline: none;
+        }
+        
+        #map {
+            height: 300px;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/autoparts.png" alt="logo">
+            </a>
+            <h2>Mohammed <br>Auto Parts</h2>
+        </div>
+        
+        <div class="signup">
+            <span id="welcome-message"></span>
+            <a id="logout-link" href="#" style="display: none;">
+                <img src="images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex; justify-content: flex-end;" title="Log Out">
+            </a>
+            <a href="signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+                <img src="images/sign.png" alt="signup" class="sign-icon" width="30">
+            </a>
+        </div>
+    </header>
+    
+    
+
+    <div class="menu">
+        <ul class="menu-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="allprod.html">All products</a></li>
+            <li><a href="toyota.html">Toyota</a></li>
+            <li><a href="nissan.html">Nissan</a></li>
+            <li><a href="dodge.html">Dodge</a></li>
+            <li><a href="honda.html">Honda</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+            </div>
+        </div> 
+        </ul>
+        
+    <br><br>
+    <div class="container">
+        <h2>Shipping Address</h2>
+
+    <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" class="shipping-input" name="name" placeholder="Your name" required>
+    </div>
+    <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" class="shipping-input" name="address" placeholder="Street Address 1, 2, etc..." required>
+    </div>
+    <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" id="city" class="shipping-input" name="city" placeholder="City" required>
+    </div>
+    <div class="form-group">
+        <label for="zipcode">Zip Code:</label>
+        <input type="text" id="zipcode" class="shipping-input" name="zipcode" placeholder="Ex: 123456" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" class="shipping-input" name="phone" placeholder="05XXXXXXXX" required>
+    </div>
+    <div class="form-group">
+        <label for="location">Select Your Location:</label>
+        <div id="map"></div>
+    </div>
+    <div class="form-group">
+        <a href="payment.html">
+            <button type="submit" class="sign-button">Submit</button>
+        </a>
+    </div>
+    </div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0XapHIrGWV5ghT8OU3VsPQ_BMq1KxjOI&callback=initMap" async defer></script>
+<script>
+    let map;
+    let marker;
+
+    function initMap() {
+        const initialLocation = { lat: 24.010648210098726, lng: 38.19696813764175 }; 
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: initialLocation
+        });
+
+        marker = new google.maps.Marker({
+            position: initialLocation,
+            map: map,
+            draggable: true 
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function(event) {
+        });
+
+        map.addListener('click', function(event) {
+            marker.setPosition(event.latLng);
+        });
+    }
+    function loadSessionData() {
+        fetch('session.php')
+            .then(response => response.json())
+            .then(data => {
+                const welcomeMessage = document.getElementById('welcome-message');
+                const logoutLink = document.getElementById('logout-link');
+                const signinLink = document.getElementById('signin-link');
+
+                if (data.username) {
+                    welcomeMessage.textContent = `Welcome, ${data.username}`;
+                    logoutLink.style.display = 'inline';
+                    signinLink.style.display = 'none';
+                    logoutLink.addEventListener('click', function() {
+                        window.location.href = 'session.php?logout=true';
+                    });
+                } else {
+                    welcomeMessage.textContent = '';
+                    logoutLink.style.display = 'none';
+                    signinLink.style.display = 'inline';
+                }
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSessionData);
+</script>
+<script src="filters.js"></script>
+    <br><br>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-content">
+            <h3>All Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All Products</a></li>
+                <li><a href="toyota.html">Toyota</a></li>
+                <li><a href="nissan.html">Nissan</a></li>
+                <li><a href="dodge.html">Dodge</a></li>
+                <li><a href="honda.html">Honda</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="signin.html">Sign In</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+            <h3>Quick Links</h3>
+            <ul class="footer-list"> 
+                <li><a href="index.html">Home</a></li>
+                <li><a href="allprod.html">All products</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-content">
+        <h3>Contact Us</h3>
+            <p><a href="mailto:ghamma43@gmail.com">Email</a></p>
+            <p>+966 56 050 4111</p>
+            
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <p>&copy; 2024 AutoParts. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoParts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/myStyle.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="admin.html">
+                <img src="../images/autoparts.png" alt="logo">
+            </a>
+            <h2>Mohammed <br> Auto Parts</h2>
+        </div>
+        
+        <div class="signup" style="display: flex; align-items: center;">
+            <span id="welcome-message"></span>
+            <a id="logout-link" href="#" style="display: none;">
+                <img src="../images/logout.png" alt="logout" class="logout-icon" width="30" style="display: flex;" title="Log Out">
+            </a>
+            <a href="../signin.html" id="signin-link" style="display: inline;" title="Sign up or in">
+                <img src="../images/sign.png" alt="signup" class="sign-icon" width="30">
+            </a>
+        </div>
+    </header>
+
+    <div class="admin-dsh">
+<div class="nav-container">
+    <div class="sidebar">
+        <ul class="menu">
+            <li><a href="admin.html"><span>Home</span></a></li>
+            <hr>
+            <li><a href="addproducts.html"><span>Add new products</span></a></li>
+            <hr>
+            <li><a href="orders.html"><span>Orders</span></a></li>
+            <hr>
+            <li><a href="contactmsg.html"><span>Contacts</span></a></li>
+            <hr>
+            <li>
+                <a id="logout-link" href="#">
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="admin-content">
+    <h1>Admin Dashboard</h1>
+    
+    <div class="dashboard-overview">
+        <div class="card">
+            <h3>Total Products</h3>
+            <p>49</p>
+        </div>
+        <div class="card">
+            <h3>Total Orders</h3>
+            <p>34</p>
+        </div>
+        <div class="card">
+            <h3>Total Revenue</h3>
+            <p>$2,743.94</p>
+        </div>
+        <div class="card">
+            <h3>New Messages</h3>
+            <p>5</p>
+        </div>
+    </div>
+
+    <h2>Recent Orders</h2>
+    <table class="messages-table" style="margin-bottom: 40px;">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer Name</th>
+                <th>Status</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#283</td>
+                    <td>Mohammed Alghamdi</td>
+                    <td>Shipped</td>
+                    <td>$150.00</td>
+                </tr>
+                <tr>
+                    <td>#573</td>
+                    <td>Ahmed</td>
+                    <td>Processing</td>
+                    <td>$200.00</td>
+                </tr>
+                <tr>
+                    <td>#683</td>
+                    <td>Nawaf</td>
+                    <td>Delivered</td>
+                    <td>$300.00</td>
+                </tr>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Latest Products</h2>
+    <div class="latest-products">
+        <div class="prod-card">
+            <h4>Oil Filter</h4>
+            <p>Price: $9.99.00</p>
+            <p>Stock: 45</p>
+        </div>
+        <div class="prod-card">
+            <h4>Brake Pads</h4>
+            <p>Price: $75.00</p>
+            <p>Stock: 20</p>
+        </div>
+        <div class="prod-card">
+            <h4>Suspension kit</h4>
+            <p>Price: $150.00</p>
+            <p>Stock: 30</p>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br>
+
+<script>
+    function loadSessionData() {
+        fetch('../session.php')
+            .then(response => response.json())
+            .then(data => {
+                const welcomeMessage = document.getElementById('welcome-message');
+                const logoutLink = document.getElementById('logout-link');
+                const signinLink = document.getElementById('signin-link');
+
+                if (data.username) {
+                    welcomeMessage.textContent = `Welcome, ${data.username}`;
+                    logoutLink.style.display = 'inline';
+                    signinLink.style.display = 'none';
+                    logoutLink.addEventListener('click', function() {
+                        window.location.href = '../session.php?logout=true';
+                    });
+                } else {
+                    welcomeMessage.textContent = '';
+                    logoutLink.style.display = 'none';
+                    signinLink.style.display = 'inline';
+                }
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSessionData);
+</script>

@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.admin-dsh {
+    background-color: #fff; /* Set the body background color */
+    color: #18084f; /* Set the body text color */
+    display: flex; /* Use flexbox for layout */
+    min-height: 100vh; /* Full viewport height */
+}
+
+h1{
+    color: #18084f;
+}
+h3 {
+    color: #18084f;
+}
+
+h4 {
+    color: #18084f;
+}
+
+.nav-container {
+    display: flex; /* Flexbox for layout */
+}
+
+.sidebar {
+    width: 250px; /* Fixed width for sidebar */
+    height: 100vh; /* Full height of viewport */
+    background-color: #f3f4f6; /* Background color for sidebar */
+    color: #18084f; /* Text color for sidebar */
+    padding: 10px 0; /* Padding for sidebar */
+}
+
+.sidebar ul.menu {
+    list-style: none; /* Remove list styling */
+    padding: 20px 0; /* Padding for menu */
+}
+
+.sidebar ul.menu li {
+    padding: 0;
+    text-align: left; /* Align text to the left */
+}
+
+.sidebar ul.menu li a {
+    text-decoration: none; /* Remove underline */
+    color: #18084f; /* Link color */
+    display: flex; /* Flexbox for links */
+    align-items: center; /* Center items vertically */
+    padding: 10px 15px; /* Padding for links */
+    transition: background-color 0.2s; /* Transition for hover effect */
+}
+
+.sidebar ul.menu li a:hover {
+    background-color: #18084f; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+.admin-content {
+    flex: 1; /* Allow admin content to fill remaining space */
+    padding: 30px; /* Reduce padding for a more compact layout */
+    background-color: #ffffff; /* Background color for content */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    border-radius: 8px; /* Rounded corners for the content area */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+h1 {
+    font-size: 2rem; /* Larger font size for the title */
+    color: #18084f; /* Heading color */
+    margin-bottom: 20px; /* Space below the title */
+}
+
+.dashboard-overview {
+    display: flex; /* Flexbox for dashboard cards */
+    gap: 20px; /* Space between cards */
+    margin-bottom: 20px; /* Margin below the dashboard */
+}
+
+.card {
+    background-color: #f9f9f9; /* Background color for cards */
+    border: 1px solid #e0e0e0; /* Light border for cards */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding for cards */
+    width: 220px; /* Fixed width for cards */
+    text-align: center; /* Center text in cards */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for effects */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.orders-table {
+    width: 100%; /* Full width for table */
+    border-collapse: collapse; /* Collapse borders */
+    margin-bottom: 20px; /* Margin below table */
+}
+
+.orders-table th,
+.orders-table td {
+    border: 1px solid #ddd; /* Border for table cells */
+    padding: 12px; /* Increased padding for table cells */
+    text-align: left; /* Align text to the left */
+}
+
+.orders-table th {
+    background-color: #f3f4f6; /* Header background color */
+    color: #18084f; /* Header text color */
+    font-weight: bold; /* Bold text for header */
+}
+
+.orders-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Stripe effect for even rows */
+}
+
+.orders-table tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+.latest-products {
+    display: flex; /* Flexbox for latest products */
+    flex-wrap: wrap; /* Wrap products to next line */
+    gap: 20px; /* Space between product cards */
+}
+
+.prod-card {
+    background-color: #f9f9f9; /* Background color for product cards */
+    border: 1px solid #ddd; /* Border for product cards */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Padding for product cards */
+    width: 150px; /* Fixed width for product cards */
+    text-align: center; /* Center text in product cards */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for effects */
+}
+
+.prod-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.messages-table {
+    width: 100%; /* Full width for table */
+    border-collapse: collapse; /* Collapse borders */
+    margin-top: 20px; /* Margin above the table */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure rounded corners apply to child elements */
+}
+
+.messages-table th, .messages-table td {
+    border: 1px solid #e0e0e0; /* Light border for table cells */
+    padding: 12px; /* Padding for table cells */
+    text-align: left; /* Align text to the left */
+    color: #18084f;
+    transition: background-color 0.3s; /* Smooth transition for hover effects */
+}
+
+.messages-table th {
+    background-color: #18084f; /* Dark header background color */
+    color: #ffffff; /* White text color for header */
+    font-weight: bold; /* Bold text for header */
+}
+
+.messages-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light background for even rows */
+}
+
+.messages-table tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+
+.messages-table td:first-child {
+    font-weight: bold; /* Make the Message ID bold */
+}
+
+.add-message{
+    color: #fff;
+    background-color: #18084f;
+    border-radius: 5px;
+    padding: 2px 0;
+    margin: 0 30px;
+    font-weight: bolder;
+    text-align: center;
+}
