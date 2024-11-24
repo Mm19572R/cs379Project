@@ -47,21 +47,55 @@
         </ul>
         
     <br><br>
-    <div class="cart-container">
-        <h1>Your Shopping Cart</h1>
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                    
-            </tbody>
+   <div class="cart-container">
+    <h1>Your Shopping Cart</h1>
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="product-info">
+                        <img src="images/camrysideskirts.jpg" alt="Product 1" style="border-radius: 5px;" width="30" height="30">
+                        <p>2018 Camry Side Skirts</p>
+                    </div>
+                </td>
+                <td>
+                    <input type="number" value="1" min="1" id="quantity" data-product-id="1" onchange="updateTotals()">
+                </td>
+                <td>$59.99</td>
+                <td class="total-price" id="total-price-1">$59.99</td>
+                <td>
+                    <img src="images/remove.png" alt="remove-icon" id="remove-icon" title="Remove from cart" onclick="removeItem(1)">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="product-info">
+                        <img src="images/altimarearbumber.jpg" alt="Product 2" style="border-radius: 5px;" width="30" height="30">
+                        <p>2016 Nissan Altima Rear Bumper</p>
+                    </div>
+                </td>
+                <td>
+                    <input type="number" value="1" min="1" id="quantity" data-product-id="2" onchange="updateTotals()">
+                </td>
+                <td>$79.99</td>
+                <td class="total-price" id="total-price-2">$79.99</td>
+                <td>
+                    <img src="images/remove.png" alt="remove-icon" id="remove-icon" title="Remove from cart" onclick="removeItem(2)">
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
         </table>
         <div class="cart-summary">
             <h2>Summary</h2>
