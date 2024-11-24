@@ -85,6 +85,7 @@
     <br>
 
    <script>
+       /*
     function loadSessionData() {
         fetch('session.php')
             .then(response => response.json())
@@ -185,12 +186,64 @@ function addToCart(product) {
         updateCartCount();
     }
 }
+*/
     </script>
 
 <script src="filters.js"></script>
 <fieldset>
     <legend>All Products</legend>
-    <div id="all-prod" class="results-container"></div>
+    <div id="all-prod" class="results-container">
+        <div class="product-card">
+    <img src="images/camrysideskirt.jpg" alt="2018 Camry Side Skirts" class="product-image">
+    <div class="product-info">
+        <h4 class="product-name">2018 Camry Side Skirts</h4>
+        <p class="product-price">Price: $59.99</p>
+        <p class="product-stock">Stock: 20</p>
+        <div class="rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9734;</span>
+        </div>
+    </div>
+    <button class="add-to-cart">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/corollaairfilter.png" alt="2006 Corolla Air Filter" class="product-image">
+    <div class="product-info">
+        <h4 class="product-name">2006 Corolla Air Filter</h4>
+        <p class="product-price">Price: $24.99</p>
+        <p class="product-stock">Stock: 15</p>
+        <div class="rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9734;</span>
+            <span class="star">&#9734;</span>
+        </div>
+    </div>
+    <button class="add-to-cart">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/hondaoilfilter.jpg" alt="Honda Accord Oil Filter" class="product-image">
+    <div class="product-info">
+        <h4 class="product-name">2018 Honda Accord Oil Filter</h4>
+        <p class="product-price">Price: $19.99</p>
+        <p class="product-stock">Stock: 30</p>
+        <div class="rating">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9734;</span>
+            <span class="star">&#9734;</span>
+            <span class="star">&#9734;</span>
+        </div>
+    </div>
+    <button class="add-to-cart">Add to Cart</button>
+</div>
+    </div>
 </fieldset>
 <br><br>
 <footer>
